@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotak Masuk Gmail - Permintaan Reset Password</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f6f8fc;
+            color: #202124;
+            overflow-x: hidden;
+        }
+        .main-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            background-color: #fff;
+            padding: 1rem 0;
+            border-right: 1px solid #dadce0;
+        }
+        .sidebar-header {
+            padding: 0 1rem 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar-header .logo {
+            width: 110px;
+        }
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: #5f6368;
+            border-top-right-radius: 999px;
+            border-bottom-right-radius: 999px;
+            margin-right: 1rem;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+        .sidebar-nav li a.active {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            font-weight: 700;
+        }
+        .sidebar-nav li a:hover:not(.active) {
+            background-color: #f1f3f4;
+        }
+        .sidebar-nav .icon {
+            width: 24px;
+            text-align: center;
+            margin-right: 1rem;
+        }
+        .sidebar .compose-button {
+            background-color: #c2e7ff;
+            color: #1a73e8;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem;
+            margin: 1.5rem 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+        }
+        .sidebar .compose-button .icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        .sidebar .unread-count {
+            margin-left: auto;
+            color: #1a73e8;
+            font-weight: 700;
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+
+        /* --- Header Utama --- */
+        .main-header {
+            padding: 0.5rem 1.5rem;
+            border-bottom: 1px solid #dadce0;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .main-header .search-bar {
+            flex-grow: 1;
+        }
+        .main-header .search-bar input {
+            background-color: #eaf1fb;
+            border: none;
+            padding: 0.5rem 1rem;
+            padding-left: 3rem;
+            border-radius: 999px;
+            width: 100%;
+        }
+        .search-container {
+            position: relative;
+        }
+        .search-container .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #5f6368;
+        }
+        .main-header .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .main-header .user-profile .profile-pic {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: #fbbc04;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* --- Toolbar Email --- */
+        .email-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1.5rem;
+            border-bottom: 1px solid #dadce0;
+            background-color: #fff;
+        }
+        .email-toolbar .left-icons,
+        .email-toolbar .right-info {
+            display: flex;
+            align-items: center;
+        }
+        .email-toolbar .btn {
+            color: #5f6368;
+            background-color: transparent;
+            border: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        .email-toolbar .btn:hover {
+            background-color: #f1f3f4;
+        }
+        .email-toolbar .right-info .info-text {
+            color: #5f6368;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+        .email-toolbar .right-info .info-text span {
+            font-weight: 500;
+        }
+
+        /* --- Area Konten Email --- */
+        .email-content-area {
+            flex-grow: 1;
+            padding: 1.5rem;
+            background-color: #fff;
+            overflow-y: auto;
+        }
+        .email-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .email-header h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .email-header .action-icons .btn {
+            color: #5f6368;
+            font-size: 1.1rem;
+            padding: 0.5rem;
+        }
+        .email-header .action-icons .dropdown-toggle::after {
+            display: none;
+        }
+        .email-sender-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .email-sender-info .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #c5c5c5;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        .email-sender-info .sender-details {
+            display: flex;
+            flex-direction: column;
+        }
+        .email-sender-info .sender-details strong {
+            font-weight: 500;
+        }
+        .email-sender-info .sender-details small {
+            color: #5f6368;
+        }
+        .email-date {
+            margin-left: auto;
+            color: #5f6368;
+            font-size: 0.8rem;
+        }
+
+        /* --- Konten Pesan Email --- */
+        .email-body {
+            line-height: 1.6;
+            color: #202124;
+            padding: 2rem;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+        }
+        .email-body p {
+            margin-bottom: 1rem;
+        }
+        .email-body .disclaimer {
+            font-size: 0.8rem;
+            color: #5f6368;
+            margin-top: 2rem;
+        }
+        .email-body .reset-link-button {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        .email-body .reset-link-button:hover {
+            background-color: #1765c9;
+        }
+
+        /* --- Footer Email --- */
+        .email-footer {
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem;
+            border-top: 1px solid #dadce0;
+            margin-top: 1.5rem;
+        }
+        .email-footer .btn {
+            background-color: #fff;
+            color: #1a73e8;
+            border: 1px solid #dadce0;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            margin: 0 0.5rem;
+            font-weight: 500;
+        }
+
+        /* --- Media Queries for responsiveness --- */
+        @media (max-width: 992px) {
+            .sidebar {
+                position: absolute;
+                left: -250px;
+                transition: left 0.3s ease-in-out;
+                z-index: 1000;
+                height: 100vh;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            .main-content {
+                width: 100%;
+            }
+            .main-header .search-bar {
+                order: 2;
+                flex-basis: 100%;
+                margin-top: 1rem;
+            }
+            .main-header .user-profile {
+                order: 3;
+            }
+            .main-header .menu-icon {
+                display: block;
+            }
+        }
+        @media (max-width: 768px) {
+            .email-toolbar .right-info {
+                display: none;
+            }
+        }
+        @media (max-width: 576px) {
+            .email-header h1 {
+                font-size: 1.2rem;
+            }
+            .email-footer .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="btn d-md-none" id="sidebar-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x.png" alt="Gmail" class="logo">
+        </div>
+        <a href="#" class="compose-button">
+            <i class="fas fa-pen icon"></i>
+            Tulis
+        </a>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#" class="active">
+                        <span class="icon"><i class="fas fa-inbox"></i></span>
+                        Kotak Masuk
+                        <span class="unread-count">392</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        Berbintang
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-clock"></i></span>
+                        Ditunda
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-paper-plane"></i></span>
+                        Terkirim
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-file"></i></span>
+                        Draf
+                        <span class="unread-count">1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                        Selengkapnya
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-plus"></i></span>
+                        Label
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="mt-auto p-3">
+             <div class="d-flex flex-column gap-2">
+                <a href="#" class="text-decoration-none text-muted"><i class="fas fa-comment me-2"></i> Chat</a>
+                <a href="#" class="text-decoration-none text-muted"><i class="fas fa-video me-2"></i> Meet</a>
+             </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="main-header">
+            <button class="btn d-md-none" id="sidebar-toggle-main"><i class="fas fa-bars"></i></button>
+            <div class="search-container search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Telusuri email">
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-question-circle text-muted"></i>
+                <i class="fas fa-cog text-muted"></i>
+                <i class="fas fa-grip text-muted"></i>
+                <div class="profile-pic">G</div>
+            </div>
+        </header>
+
+        <div class="email-toolbar">
+            <div class="left-icons">
+                <div class="btn-group me-2">
+                    <button class="btn"><i class="fas fa-arrow-left"></i></button>
+                </div>
+                <div class="btn-group border-start ps-2">
+                    <button class="btn"><i class="fas fa-trash-alt"></i></button>
+                    <button class="btn"><i class="fas fa-archive"></i></button>
+                    <button class="btn"><i class="fas fa-exclamation-triangle"></i></button>
+                </div>
+                <div class="btn-group border-start ps-2">
+                    <button class="btn"><i class="fas fa-arrow-right"></i></button>
+                    <button class="btn"><i class="fas fa-tag"></i></button>
+                    <button class="btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+            <div class="right-info">
+                <span class="info-text"><span>2</span> dari <span>451</span></span>
+                <button class="btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="btn"><i class="fas fa-chevron-right"></i></button>
+                <button class="btn"><i class="fas fa-sort-amount-down"></i></button>
+            </div>
+        </div>
+
+        <div class="email-content-area">
+            <div class="email-header">
+                <h1>Permintaan Reset Password Aplikasi LAB TEKKIM</h1>
+                <div class="action-icons d-flex align-items-center gap-2">
+                    <i class="fas fa-print text-muted"></i>
+                    <i class="fas fa-external-link-alt text-muted"></i>
+                </div>
+            </div>
+
+            <div class="email-sender-info">
+                <div class="profile-pic">L</div>
+                <div class="sender-details">
+                    <strong>LAB TEKKIM</strong>
+                    <small>kepada saya</small>
+                </div>
+                <div class="email-date">
+                    Kam, 31 Jul, 08:51 (18 jam yang lalu)
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Lihat detail</a></li>
+                            <li><a class="dropdown-item" href="#">Blokir "LAB TEKKIM"</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <i class="fas fa-star text-muted ms-2"></i>
+                <i class="fas fa-reply text-muted ms-2"></i>
+            </div>
+            
+            <div class="email-body">
+                <p><strong>Subjek:</strong> Permintaan Reset Password Aplikasi LAB TEKKIM</p>
+                <p>Dear [Gunawan],</p>
+                <p>Kami telah menerima permintaan reset password untuk akun Anda di aplikasi [LAB TEKKIM]. Jika Anda tidak melakukan permintaan ini, silakan abaikan email ini.</p>
+                <p>Untuk melakukan reset password, silakan klik link berikut:</p>
+                <p>[Klik di sini untuk reset password]( <a href="#" >Link Reset Password</a> )</p>
+                <p class="disclaimer">
+                    Google LLC 1600 Amphitheatre Parkway, Mountain View, CA 94043, Amerika Serikat<br>
+                    Kami mengirimkan email ini karena Anda telah menyatakan bersedia menerima notifikasi email dari Google Classroom. Jika tidak ingin menerima email seperti ini, Anda dapat berhenti berlangganan atau menonaktifkan setelan.
+                </p>
+            </div>
+        </div>
+
+        <div class="email-footer">
+            <button class="btn">Balas</button>
+            <button class="btn">Teruskan</button>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebarToggleMain = document.getElementById('sidebar-toggle-main');
+
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+
+    sidebarToggleMain.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+</script>
+
+</body>
+</html>
