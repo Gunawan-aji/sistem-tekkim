@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAD Teknik Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <div class="bg-dark text-white sidebar-wrapper d-flex flex-column">
+            <div class="sidebar-heading p-4 text-center">
+                <img src="../img/Logo-UAD.png" alt="UAD Logo" class="img-fluid me-2" style="max-height: 40px;">
+                <span class="fs-4 fw-bold">Teknik UAD</span>
+            </div>
+            <!-- <div class="profile-section p-4 text-center">
+                <img src="../img/user.png" alt="User Profile" class="rounded-circle mb-2" style="width: 80px; height: 80px;">
+                <p class="mb-0">Kevin Margan</p>
+                <span class="badge bg-secondary">CTO Program</span>
+            </div> -->
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="#" class="list-group-item list-group-item-action py-3 ripple active" data-target="dashboard-content">
+                    <i class="fas fa-th-large fa-fw me-2"></i>Dashboard
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-3 ripple" data-target="registrasi-content">
+                    <i class="fas fa-user-plus fa-fw me-2"></i>Registrasi
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-3 ripple" data-target="ubah-profile-content">
+                    <i class="fas fa-edit fa-fw me-2"></i>Ubah Profile
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-3 ripple" data-bs-toggle="collapse" data-bs-target="#lab-collapse" aria-expanded="false">
+                    <i class="fas fa-flask fa-fw me-2"></i>Tambah Labolatorium
+                </a>
+                <div class="collapse" id="lab-collapse">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ps-5" data-target="daftar-lab-content">Daftar Lab</a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ps-5" data-target="tambah-lab-content">Tambah Lab</a>
+                </div>
+                <a href="#" class="list-group-item list-group-item-action py-3 ripple" data-target="aktivitas-administrator-content">
+                    <i class="fas fa-tasks fa-fw me-2"></i>Aktivitas Administrator
+                </a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper" class="bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-outline-secondary" id="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <h5 class="ms-3 mb-0">Dashboard</h5>
+                    <div class="d-flex ms-auto align-items-center">
+                        <img src="../img/user.png" alt="Profile" class="rounded-circle me-2" style="width: 35px; height: 35px;">
+                        <span class="d-none d-md-inline-block" id="profile-name-text2">Kevin Margan</span>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid pt-4">
+                <div id="dashboard-content" class="content-section active">
+                    <div class="row g-3 mb-4">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card bg-white shadow-sm p-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-user-cog fa-2x text-info me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0 text-muted">Admin</h6>
+                                        <h4 class="fw-bold mb-0">3</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card bg-white shadow-sm p-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-chalkboard-teacher fa-2x text-danger me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0 text-muted">Dosen</h6>
+                                        <h4 class="fw-bold mb-0">3</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card bg-white shadow-sm p-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-users-cog fa-2x text-success me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0 text-muted">Anggota</h6>
+                                        <h4 class="fw-bold mb-0">3</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card bg-white shadow-sm p-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-users fa-2x text-warning me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0 text-muted">Members</h6>
+                                        <h4 class="fw-bold mb-0">3</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-3 shadow-sm">
+                        <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user-list" type="button" role="tab" aria-controls="user-list" aria-selected="true">Daftar Labolatorium</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="lab-tab" data-bs-toggle="tab" data-bs-target="#lab-list" type="button" role="tab" aria-controls="lab-list" aria-selected="false">Daftar Staff</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="user-list" role="tabpanel" aria-labelledby="user-tab">
+                                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+                                    <ul class="nav nav-pills mb-2 mb-md-0" id="userPills" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#lab-aktif-table" type="button">Lab Aktif</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#lab-tidak-aktif-table" type="button">Lab Tidak Aktif</button>
+                                        </li>
+                                    </ul>
+                                    <div class="input-group w-100 w-md-auto">
+                                        <input type="text" class="form-control" placeholder="Pencarian...">
+                                    </div>
+                                </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="lab-aktif-table">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nama Labolatorium</th>
+                                                        <th>Kepala Labolatorium</th>
+                                                        <th>Admin Labolatorium</th>
+                                                        <th>Safety Officer</th>
+                                                        <th>E-mail Labolatorium</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>1</td><td>Lab OTK</td><td>M TAMRIN</td><td>m.tamrin</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><a href="#" class="btn btn-sm btn-outline-info">Lab-Aktif</a></td></tr>
+                                                    <tr><td>2</td><td>Lab Rekayasa Proses Kimia</td><td>Eko Susilowati</td><td>eko.susilowati</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><a href="#" class="btn btn-sm btn-outline-info">Lab-Aktif</a></td></tr>
+                                                    <tr><td>3</td><td>Lab Analisis dan Instrumental</td><td>Nadiadika Amelia</td><td>nadiadika.amelia</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><a href="#" class="btn btn-sm btn-outline-info">Lab-Aktif</a></td></tr>
+                                                    <tr><td>4</td><td>Lab Energi</td><td>Eko Susilowati</td><td>eko.susilowati</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><a href="#" class="btn btn-sm btn-outline-info">Lab-Aktif</a></td></tr>
+                                                    <tr><td>5</td><td>Lab Material</td><td>Eko Susilowati</td><td>eko.susilowati</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><a href="#" class="btn btn-sm btn-outline-info">Lab-Aktif</a></td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="lab-tidak-aktif-table">
+                                        <p class="text-center text-muted mt-5">Tabel untuk Lab Tidak Aktif akan ditampilkan di sini.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="lab-list" role="tabpanel" aria-labelledby="lab-tab">
+                                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+                                    <ul class="nav nav-pills mb-2 mb-md-0" id="labPills" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#user-staff-table" type="button">All Staff</button>
+                                        </li>
+                                    </ul>
+                                    <div class="input-group w-100 w-md-auto">
+                                        <input type="text" class="form-control" placeholder="Pencarian...">
+                                    </div>
+                                </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="user-staff-table">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nama Labolatorium</th>
+                                                        <th>Nama</th>
+                                                        <th>UserID</th>
+                                                        <th>Phone</th>
+                                                        <th>Email</th>
+                                                        <th>Role User</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>1</td><td>Lab Analisis dan Instrumental</td><td>3242324234</td><td>3242324234</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><span class="badge bg-primary">Admin</span></td></tr>
+                                                    <tr><td>2</td><td>Lab Material</td><td>Agus_Alistiawan, S.T., M.Eng.</td><td>AgusAlistiawan</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><span class="badge bg-success">Mahasiswa</span></td></tr>
+                                                    <tr><td>3</td><td>Lab Rekayasa Proses Kimia</td><td>2350202044</td><td>Ahmad Lupi</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><span class="badge bg-danger">Tendik</span></td></tr>
+                                                    <tr><td>4</td><td>Lab Operasi Teknik Kimia</td><td>2200202004</td><td>Ahmad Durrahim Mursalim</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><span class="badge bg-warning">Dosen</span></td></tr>
+                                                    <tr><td>5</td><td>Lab Energi</td><td>1234567879</td><td>Abtowsin</td><td>081328000002</td><td>m.tamrin@staf.uad.ac.id</td><td><span class="badge bg-primary">Admin</span></td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="registrasi-content" class="content-section">
+                    <div class="alert alert-info" role="alert">
+                        <table class="daftaradm">
+                            <tbody>
+                                <tr>
+                                    <td><h3>Daftar Sebagai Administrator Program </h3></td>
+                                    <td><a href="#" class="btn btn-sm btn-outline-info">Daftar</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="ubah-profile-content" class="content-section">
+                    <div class="alert alert-primary text-center" role="alert">
+                        <h3>Halaman Ubah Profil</h3>
+                        <div class="profile-picture">
+                            <img src="../img/user.png" alt="">
+                        </div>
+                        <h4 id="profile-name-text" class="mt-4">Kevin Margan</h4>
+                        <input type="text" id="profile-name-input" class="form-control mt-4 d-none">
+                        <!-- <p class="text-muted">Jabatan: Kepala Laboratorium</p> -->
+                        <div class="profile-data w-100">
+                            <table class="table-custom mt-2">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">NIP</td>
+                                        <td>
+                                            <span id="nim-text">: 201910410111</span>
+                                            <input type="text" id="nim-input" class="d-none w-100">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Email</td>
+                                        <td>
+                                            <span id="email-text">: kevinmargan@mail.com</span>
+                                            <input type="email" id="email-input" class="d-none w-100">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Jabatan</td>
+                                        <td>
+                                            <span id="prodi-text">: Kepala LAB Teknik Kimia</span>
+                                            <input type="text" id="prodi-input" class="d-none w-100">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button id="edit-btn" class="btn btn-primary mt-3">Edit Profil</button>
+                        <div class="edit-buttons d-none mt-3">
+                            <button id="save-btn" class="btn btn-success me-2">Simpan</button>
+                            <button id="cancel-btn" class="btn btn-secondary">Batal</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="daftar-lab-content" class="content-section">
+                    <div class="alert alert-success text-center" role="alert">
+                        <h3>Halaman Daftar Lab</h3>
+                        <p>Konten untuk melihat daftar semua laboratorium akan berada di sini.</p>
+                    </div>
+                </div>
+
+                <div id="tambah-lab-content" class="content-section">
+                    <div class="alert alert-warning text-center" role="alert">
+                        <h3>Halaman Tambah Lab</h3>
+                        <p>Di sini Anda bisa menambahkan formulir untuk membuat laboratorium baru.</p>
+                    </div>
+                </div>
+
+                <div id="aktivitas-administrator-content" class="content-section">
+                    <div class="alert alert-info text-center" role="alert">
+                        <h3>Halaman Aktivitas Administrator</h3>
+                        <p>Konten untuk melihat log aktivitas administrator akan berada di sini.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

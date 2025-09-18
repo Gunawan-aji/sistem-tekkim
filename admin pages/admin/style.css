@@ -1,0 +1,176 @@
+:root {
+    --main-bg-color: #f8f9fa; /* light */
+    --main-text-color: #343a40; /* dark */
+    --sidebar-bg-color: #2b3035; /* dark grey */
+    --sidebar-link-hover-color: #495057; /* darker grey */
+    --sidebar-active-color: #0d6efd; /* blue */
+    --card-bg-color: #ffffff; /* white */
+    --card-shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--main-bg-color);
+}
+
+/* Hapus "display: flex;" dari #wrapper */
+/* #wrapper {
+    Tidak ada lagi flexbox di sini
+} */
+
+.sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+    background-color: var(--sidebar-bg-color);
+
+    /* Ubah ini untuk efek overlay */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+    /* Gunakan transform untuk animasi */
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-out;
+}
+
+#wrapper.toggled .sidebar-wrapper {
+    /* Geser sidebar ke posisi terlihat */
+    transform: translateX(0);
+}
+
+/* Hapus semua aturan margin-left pada page-content-wrapper */
+#page-content-wrapper {
+    min-width: 100vw;
+    margin-left: 0; /* Pastikan margin selalu 0 */
+}
+
+/* Hapus juga aturan ini karena tidak lagi relevan */
+#wrapper.toggled #page-content-wrapper {
+    margin-left: 0;
+}
+
+/* ... (aturannya tetap sama untuk elemen lain) ... */
+
+.sidebar-heading {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list-group-item {
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: var(--sidebar-bg-color);
+}
+
+.list-group-item.active,
+.list-group-item:hover,
+.list-group-item:focus {
+    background-color: var(--sidebar-link-hover-color);
+    color: #fff;
+}
+
+.list-group-item.active {
+    background-color: var(--sidebar-active-color) !important;
+}
+
+.profile-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.nav-tabs .nav-link {
+    color: var(--main-text-color);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--card-bg-color);
+    border-bottom: 2px solid var(--sidebar-active-color);
+}
+
+.nav-pills .nav-link {
+    border-radius: 0;
+    color: var(--main-text-color);
+    background-color: #e9ecef;
+    margin-right: 5px;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #adb5bd;
+    color: #fff;
+}
+
+.card {
+    border: none;
+    border-radius: .5rem;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* register adm */
+.daftaradm tr td a{
+    margin-left: 45rem;
+}
+
+
+/* Profil */
+        .profile-picture img{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .profile-data input {
+            border: 1px solid #ccc;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        .profile-data input:focus {
+            outline: none;
+            border-color: #0b5ed7;
+        }
+
+        .table-custom {
+            border: none; 
+            background-color: transparent;
+        }
+
+        /* Menghilangkan border pada sel (td) */
+        .table-custom tr td {
+            border: none;
+            text-align: left;
+        }
+         .table-custom tr td span {
+            margin-left: 3rem;
+        }
+
+
+/*
+   Untuk perangkat seluler, pastikan logika overlay tetap sama.
+   Hapus semua aturan yang menyebabkan pergeseran.
+*/
+@media (max-width: 768px) {
+    .sidebar-wrapper {
+        transform: translateX(-100%);
+    }
+
+    #wrapper.toggled .sidebar-wrapper {
+        transform: translateX(0);
+    }
+    
+    #page-content-wrapper {
+        margin-left: 0;
+    }
+    
+    #wrapper.toggled #page-content-wrapper {
+        margin-left: 0;
+    }
+}
