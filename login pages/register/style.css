@@ -72,7 +72,7 @@ body {
         }
 
         .scroll-box {
-            max-height: 400px;
+            max-height: 550px;
             overflow-y: auto;
             padding-right: 15px;
         }
@@ -134,4 +134,5 @@ body {
             .left-panel {
                 margin-bottom: 20px;
             }
+
         }
